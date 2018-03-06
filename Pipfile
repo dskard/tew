@@ -1,0 +1,20 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[dev-packages]
+
+
+
+[packages]
+
+pytest = "*"
+pytest-selenium = "*"
+pytest-xdist = "*"
+chx = {git = "https://github.com/codedsk/chx.git", editable = true}
+pexpect = "*"
+selene = {git = "https://github.com/yashaka/selene.git", editable = true}
+bravado = "*"
