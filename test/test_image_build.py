@@ -96,7 +96,7 @@ var_err=${{result%{separator}*}}
 
 
     def test_env_var_PYTHONDONTWRITEBYTECODE(self):
-        """make sure bats is installed and in PATH."""
+        """make sure PYTHONDONTWRITEBYTECODE environment variable is set."""
 
         command = "echo ${PYTHONDONTWRITEBYTECODE}"
 
@@ -111,6 +111,42 @@ var_err=${{result%{separator}*}}
 
         # compare actual with resulted
         assert expected == actual, "PYTHONDONTWRITEBYTECODE not set"
+
+
+    def test_env_var_PYTHONSTARTUP(self):
+        """make sure PYTHONSTARTUP environment variable is set."""
+
+        command = "[ `echo ${PYTHONSTARTUP} | wc -c` -gt 0 ] && echo 1 || echo 0"
+
+        # expected output from command
+        expected = BashOutput(
+                    stdout = "1",
+                    stderr = "",
+                    returncode = 0)
+
+        # actual output from command
+        actual = self.run(command)
+
+        # compare actual with resulted
+        assert expected == actual, "PYTHONSTARTUP not set"
+
+
+    def test_pystartup_file_exists(self):
+        """make sure pystartup file exists."""
+
+        command = "[ -r ${PYTHONSTARTUP} ] && echo 1 || echo 0"
+
+        # expected output from command
+        expected = BashOutput(
+                    stdout = "1",
+                    stderr = "",
+                    returncode = 0)
+
+        # actual output from command
+        actual = self.run(command)
+
+        # compare actual with resulted
+        assert expected == actual, "cannot find ${PYTHONSTARTUP} file"
 
 
     def test_python_modules_pexpect(self):

@@ -37,3 +37,7 @@ RUN apk del build-dependencies;
 
 # Prevent python from creating .pyc files and __pycache__ dirs
 ENV PYTHONDONTWRITEBYTECODE=1
+
+# Add a python startup file
+COPY pystartup /usr/local/share/python/pystartup
+ENV PYTHONSTARTUP=/usr/local/share/python/pystartup
