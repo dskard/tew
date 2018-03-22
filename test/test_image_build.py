@@ -149,10 +149,28 @@ var_err=${{result%{separator}*}}
         assert expected == actual, "cannot find ${PYTHONSTARTUP} file"
 
 
-    def test_python_modules_pexpect(self):
-        """python module pexpect is installed"""
+    def test_env_var_PYTHONUNBUFFERED(self):
+        """make sure PYTHONUNBUFFERED environment variable is set."""
 
-        command = 'python -c "import pexpect"'
+        command = "[ `echo ${PYTHONUNBUFFERED} | wc -c` -gt 0 ] && echo 1 || echo 0"
+
+        # expected output from command
+        expected = BashOutput(
+                    stdout = "1",
+                    stderr = "",
+                    returncode = 0)
+
+        # actual output from command
+        actual = self.run(command)
+
+        # compare actual with resulted
+        assert expected == actual, "PYTHONUNBUFFERED not set"
+
+
+    def test_python3_modules_pexpect(self):
+        """python3 module pexpect is installed"""
+
+        command = 'python3 -c "import pexpect"'
 
         # expected output from command
         expected = BashOutput(
@@ -164,31 +182,13 @@ var_err=${{result%{separator}*}}
         actual = self.run(command)
 
         # compare actual with resulted
-        assert expected == actual, "Python module 'pexpect' not installed"
+        assert expected == actual, "Python 3 module 'pexpect' not installed"
 
 
-    def test_python_modules_pytest(self):
-        """python module pytest is installed"""
+    def test_python3_modules_pytest(self):
+        """python3 module pytest is installed"""
 
-        command = 'python -c "import pytest"'
-
-        # expected output from command
-        expected = BashOutput(
-                    stdout = "",
-                    stderr = "",
-                    returncode = 0)
-
-        # actual output from command
-        actual = self.run(command)
-
-        # compare actual with resulted
-        assert expected == actual, "Python module 'pytest' not installed"
-
-
-    def test_python_modules_selenium(self):
-        """python module selenium is installed"""
-
-        command = 'python -c "import selenium"'
+        command = 'python3 -c "import pytest"'
 
         # expected output from command
         expected = BashOutput(
@@ -200,31 +200,13 @@ var_err=${{result%{separator}*}}
         actual = self.run(command)
 
         # compare actual with resulted
-        assert expected == actual, "Python module 'selenium' not installed"
+        assert expected == actual, "Python 3 module 'pytest' not installed"
 
 
-    def test_python_modules_selene(self):
-        """python module selene is installed"""
+    def test_python3_modules_selenium(self):
+        """python3 module selenium is installed"""
 
-        command = 'python -c "import selene"'
-
-        # expected output from command
-        expected = BashOutput(
-                    stdout = "",
-                    stderr = "",
-                    returncode = 0)
-
-        # actual output from command
-        actual = self.run(command)
-
-        # compare actual with resulted
-        assert expected == actual, "Python module 'selene' not installed"
-
-
-    def test_python_modules_bravado(self):
-        """python module selene is installed"""
-
-        command = 'python -c "import bravado"'
+        command = 'python3 -c "import selenium"'
 
         # expected output from command
         expected = BashOutput(
@@ -236,6 +218,42 @@ var_err=${{result%{separator}*}}
         actual = self.run(command)
 
         # compare actual with resulted
-        assert expected == actual, "Python module 'bravado' not installed"
+        assert expected == actual, "Python 3 module 'selenium' not installed"
+
+
+    def test_python3_modules_selene(self):
+        """python3 module selene is installed"""
+
+        command = 'python3 -c "import selene"'
+
+        # expected output from command
+        expected = BashOutput(
+                    stdout = "",
+                    stderr = "",
+                    returncode = 0)
+
+        # actual output from command
+        actual = self.run(command)
+
+        # compare actual with resulted
+        assert expected == actual, "Python 3 module 'selene' not installed"
+
+
+    def test_python3_modules_zmq(self):
+        """python3 module zmq is installed"""
+
+        command = 'python3 -c "import zmq"'
+
+        # expected output from command
+        expected = BashOutput(
+                    stdout = "",
+                    stderr = "",
+                    returncode = 0)
+
+        # actual output from command
+        actual = self.run(command)
+
+        # compare actual with resulted
+        assert expected == actual, "Python 3 module 'zmq' not installed"
 
 

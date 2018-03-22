@@ -17,6 +17,5 @@ pytest-xdist = "*"
 chx = {git = "https://github.com/codedsk/chx.git", editable = true}
 pexpect = "*"
 selene = {git = "https://github.com/yashaka/selene.git", editable = true}
-bravado = "*"
 pytest-repeat = "*"
 selenium = "==3.8.1"

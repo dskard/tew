@@ -1,15 +1,20 @@
-FROM gliderlabs/alpine:3.4
+FROM alpine:3.7
 
 # Install base packages and build dependencies
 RUN set -ex; \
     apk add --no-cache \
       bash \
-      python \
       python3 \
-      py-setuptools; \
+      py-setuptools \
+      py3-zmq ; \
     apk add --no-cache --virtual build-dependencies \
+      g++ \
+      gcc \
       git \
-      py-pip \
+      libffi-dev \
+      musl-dev \
+      openssl-dev \
+      python3-dev \
       wget;
 
 # Install BATS in /usr/local
@@ -24,19 +29,20 @@ RUN set -ex; \
 COPY Pipfile Pipfile
 COPY Pipfile.lock Pipfile.lock
 RUN set -ex; \
-    pip install pipenv; \
-    pipenv install --system;\
-    pip uninstall --yes pipenv; \
-    pip3 install pipenv; \
-    pipenv install --system;\
+    pip3 install --no-cache-dir pipenv; \
+    pipenv --python 3 install --system --verbose;\
     pip3 uninstall --yes pipenv; \
     rm -f Pipfile Pipfile.lock;
+
 
 # Clean up unnecessary packages
 RUN apk del build-dependencies;
 
 # Prevent python from creating .pyc files and __pycache__ dirs
 ENV PYTHONDONTWRITEBYTECODE=1
+
+# Show stdout when running in docker compose (dont buffer)
+ENV PYTHONUNBUFFERED=1
 
 # Add a python startup file
 COPY pystartup /usr/local/share/python/pystartup
