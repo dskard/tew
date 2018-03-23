@@ -52,3 +52,8 @@ ENV PYTHONUNBUFFERED=1
 # Add a python startup file
 COPY pystartup /usr/local/share/python/pystartup
 ENV PYTHONSTARTUP=/usr/local/share/python/pystartup
+
+# Add an entry point script.
+COPY entry.sh /usr/local/bin/entry.sh
+RUN set -ex; \
+    chmod 755 /usr/local/bin/entry.sh;

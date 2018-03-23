@@ -257,3 +257,41 @@ var_err=${{result%{separator}*}}
         assert expected == actual, "Python 3 module 'zmq' not installed"
 
 
+    def test_entry_sh_runs_command(self):
+        """run commands through entry.sh"""
+
+        command = 'entry.sh sleep 1'
+
+        # expected output from command
+        expected = BashOutput(
+                    stdout = "Running sleep 1",
+                    stderr = "",
+                    returncode = 0)
+
+        # actual output from command
+        actual = self.run(command)
+
+        # compare actual with resulted
+        assert expected == actual, "Error running command through entry.sh"
+
+
+# TODO: not sure how to kill a command
+#
+#    def test_entry_sh_kill_command(self):
+#        """commands through entry.sh can be killed"""
+#
+#        command = 'entry.sh sleep 5'
+#
+#        # expected output from command
+#        expected = BashOutput(
+#                    stdout = "",
+#                    stderr = "",
+#                    returncode = 0)
+#
+#        # actual output from command
+#        actual = self.run(command)
+#
+#        # compare actual with resulted
+#        assert expected == actual, "Error running command through entry.sh"
+
+
