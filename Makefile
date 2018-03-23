@@ -18,5 +18,15 @@ test:
 	  dskard/tew:dev \
 	  pytest ${PYTESTOPTS} /opt/shared/tew/test
 
+run:
+	docker run -it --rm \
+	  --name=tew-test \
+	  --user=$(shell id -u):$(shell id -g) \
+	  --volume=${PWD}:/opt/shared/tew \
+	  --workdir=/opt/shared/tew \
+	  -e "PATH=/opt/shared/tew:/usr/local/bin:/usr/bin:/bin" \
+	  dskard/tew:dev \
+	  ${COMMAND}
+
 
 .PHONY: build test

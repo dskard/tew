@@ -4,9 +4,9 @@ FROM alpine:3.7
 RUN set -ex; \
     apk add --no-cache \
       bash \
+      libzmq \
       python3 \
-      py-setuptools \
-      py3-zmq ; \
+      py-setuptools; \
     apk add --no-cache --virtual build-dependencies \
       g++ \
       gcc \
@@ -17,6 +17,7 @@ RUN set -ex; \
       python3-dev \
       wget;
 
+
 # Install BATS in /usr/local
 RUN set -ex; \
     git clone https://github.com/sstephenson/bats.git; \
@@ -24,6 +25,7 @@ RUN set -ex; \
     ./install.sh /usr/local; \
     cd ../; \
     rm -rf bats;
+
 
 # Install Python modules through pipenv
 COPY Pipfile Pipfile
@@ -38,11 +40,14 @@ RUN set -ex; \
 # Clean up unnecessary packages
 RUN apk del build-dependencies;
 
+
 # Prevent python from creating .pyc files and __pycache__ dirs
 ENV PYTHONDONTWRITEBYTECODE=1
 
+
 # Show stdout when running in docker compose (dont buffer)
 ENV PYTHONUNBUFFERED=1
+
 
 # Add a python startup file
 COPY pystartup /usr/local/share/python/pystartup
