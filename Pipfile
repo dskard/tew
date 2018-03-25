@@ -20,3 +20,4 @@ selene = {git = "https://github.com/yashaka/selene.git", editable = true}
 pytest-repeat = "*"
 selenium = "==3.8.1"
 pyzmq = "*"
+aiosmtpd = "*"
