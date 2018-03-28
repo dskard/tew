@@ -7,6 +7,11 @@ RUN set -ex; \
       libzmq \
       python3 \
       py-setuptools; \
+    apk add --no-cache --virtual command-line-tools \
+      busybox-extras \
+      curl \
+      jq \
+      wget; \
     apk add --no-cache --virtual build-dependencies \
       g++ \
       gcc \
@@ -14,8 +19,7 @@ RUN set -ex; \
       libffi-dev \
       musl-dev \
       openssl-dev \
-      python3-dev \
-      wget;
+      python3-dev;
 
 
 # Install BATS in /usr/local

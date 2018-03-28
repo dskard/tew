@@ -29,4 +29,4 @@ run:
 	  ${COMMAND}
 
 
-.PHONY: build test
+.PHONY: build test run
