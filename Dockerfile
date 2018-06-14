@@ -32,6 +32,9 @@ RUN set -ex; \
 
 
 # Install Python modules through pipenv
+# set workdir to anything other than / so pipenv
+# can properly install packages
+WORKDIR /opt/pipenv
 COPY Pipfile Pipfile
 COPY Pipfile.lock Pipfile.lock
 RUN set -ex; \

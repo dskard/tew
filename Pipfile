@@ -22,3 +22,5 @@ selenium = "==3.8.1"
 pyzmq = "*"
 aiosmtpd = "*"
 pytest-asyncio = "*"
+pytest-interactive = {git = "https://github.com/tgoodlet/pytest-interactive.git"}
+pytest-logger = "*"
