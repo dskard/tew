@@ -15,8 +15,8 @@ RUN set -ex; \
 
 # Copy in Python package requirements files
 WORKDIR /opt/pipenv
-COPY python3/Pipfile Pipfile
-COPY python3/Pipfile.lock Pipfile.lock
+COPY Pipfile Pipfile
+COPY Pipfile.lock Pipfile.lock
 
 
 # Install build dependencies and Python packages
@@ -43,13 +43,25 @@ RUN set -ex; \
         apt-get purge -y --auto-remove $buildDeps;
 
 
-## Install BATS in /usr/local
-#RUN set -ex; \
-#    git clone https://github.com/sstephenson/bats.git; \
-#    cd bats; \
-#    ./install.sh /usr/local; \
-#    cd ../; \
-#    rm -rf bats;
+# Install BATS in /usr/local
+WORKDIR /tmp
+RUN set -ex; \
+        \
+        buildDeps=" \
+            git \
+        "; \
+        \
+        apt-get update; \
+        apt-get install -y $buildDeps --no-install-recommends; \
+        rm -rf /var/lib/apt/lists/*; \
+        \
+        git clone https://github.com/sstephenson/bats.git; \
+        cd bats; \
+        ./install.sh /usr/local; \
+        cd ../; \
+        rm -rf bats; \
+        \
+        apt-get purge -y --auto-remove $buildDeps;
 
 
 # Prevent python from creating .pyc files and __pycache__ dirs

@@ -19,7 +19,7 @@ build-ubuntu:
 	docker build -t="dskard/tew:python3-u16" -f python3-u16/Dockerfile .
 
 build-deb9slim:
-	docker build -t="dskard/tew:python3-deb9slim" -f python3-deb9slim/Dockerfile .
+	docker build -t="dskard/tew:python3-deb9slim" python3-deb9slim
 
 test:
 	docker run -it --rm \
