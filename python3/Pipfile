@@ -1,0 +1,20 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[dev-packages]
+
+
+
+[packages]
+
+pytest = "==3.6.0"
+pytest-repeat = "==0.4.1"
+pytest-selenium = "==1.13.0"
+pytest-xdist = "==1.22.2"
+requests = "==2.11.1"
+selenium = "==3.11.0"
+selene = {ref = "1.0.0a13", git = "https://github.com/yashaka/selene.git", editable = true}
